@@ -1,0 +1,80 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Video Watermark Protection Styles */
+/* These styles make it harder to hide or remove watermarks via CSS inspection */
+
+.video-watermark {
+  /* Force visibility - prevents hiding via CSS */
+  display: block !important;
+  visibility: visible !important;
+  
+  /* Prevent common hiding techniques */
+  clip: auto !important;
+  clip-path: none !important;
+  
+  /* Prevent text selection and copying */
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+  user-select: none !important;
+  
+  /* Prevent interaction */
+  pointer-events: none !important;
+  
+  /* Ensure high z-index and positioning */
+  z-index: 9999 !important;
+  position: absolute !important;
+  
+  /* Prevent transformations that might hide it */
+  transform: none !important;
+  
+  /* Ensure text is visible (component controls opacity dynamically) */
+  color: rgba(255, 255, 255, 0.7) !important;
+  background-color: rgba(0, 0, 0, 0.3) !important;
+  
+  /* Prevent width/height manipulation that could hide it */
+  min-width: 100px !important;
+  min-height: 20px !important;
+}
+
+/* Additional protection for fullscreen mode */
+:fullscreen .video-watermark,
+:-webkit-full-screen .video-watermark,
+:-moz-full-screen .video-watermark,
+:-ms-fullscreen .video-watermark {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 0.5 !important;
+  z-index: 9999 !important;
+}
+
+@layer base {
+  body {
+    @apply bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-primary-600 hover:bg-primary-700 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200;
+  }
+
+  .btn-secondary {
+    @apply bg-secondary-600 hover:bg-secondary-700 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200;
+  }
+
+  .btn-outline {
+    @apply border-2 border-primary-600 text-primary-600 hover:bg-primary-600 hover:text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200;
+  }
+
+  .input-field {
+    @apply w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100;
+  }
+
+  .card {
+    @apply bg-white dark:bg-gray-800 rounded-lg shadow-md p-6;
+  }
+}
+
